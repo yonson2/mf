@@ -1,4 +1,4 @@
-#leetflix - watch content online directly from your terminal
+# leetflix - watch content online directly from your terminal
 
 _leetflix_ is a small terminal utility that queries the internet for multimedia content hosted using the bittorrent protocol and tries to stream it directly to your video player.
 
@@ -27,7 +27,7 @@ You should now see a `leetflix` executable.
 
 ## Usage
 
-###Basic usage
+### Basic usage
 
 If you wanted to stream the best result available (based on the amount of seeders) there are no extra parameters needed, just do `leetflix <name>` substituting `<name>` by your query, for example, if you want to search for the movie Big Buck Bunny:
 
@@ -35,7 +35,7 @@ If you wanted to stream the best result available (based on the amount of seeder
 leetflix big buck bunny
 ```
 
-###Advanced usage
+### Advanced usage
 
 To choose which result to stream simply add `-s` as a parameter:
 
