@@ -2,15 +2,15 @@ package torrent
 
 import (
 	"fmt"
-	"github.com/anacrolix/torrent"
 	"github.com/skratchdot/open-golang/open"
-	"github.com/yonson2/leetflix/config"
-	"github.com/yonson2/leetflix/utils"
+	"github.com/yonson2/mf/config"
+	"github.com/yonson2/torrent"
 	"io"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 	"time"
@@ -62,7 +62,7 @@ func getLargestFile(t *torrent.Torrent) *torrent.File {
 
 func StreamTorrent(tURL string) error {
 	// Try to get the player first to avoid performing other operations on error
-	player, err := utils.GetPlayer()
+	player, err := getPlayer()
 	if err != nil {
 		return err
 	}
@@ -102,5 +102,13 @@ func StreamTorrent(tURL string) error {
 	return err
 }
 
-//TODO: constantly output file progress
-//TODO: Remove giberish
+func getPlayer() (string, error) {
+	path, err := exec.LookPath("mpv")
+	if err != nil {
+		path, err = exec.LookPath("mplayer")
+		if err != nil {
+			path, err = exec.LookPath("vlc")
+		}
+	}
+	return path, err
+}

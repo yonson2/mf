@@ -1,44 +1,33 @@
 package search
 
 import (
-	"encoding/json"
-	"github.com/yonson2/leetflix/config"
-	"io/ioutil"
-	"net/http"
+	"github.com/mmcdole/gofeed"
 )
 
+const searchURL = "https://nyaa.si/?f=0&c=1_0&s=seeders&o=desc&page=rss&q="
+
 type SearchItem struct {
-	Name    string `json:"name"`
-	Link    string `json:"link"`
-	Date    string `json:"date"`
-	Size    string `json:"size"`
-	Seeders int    `json:"seeders"`
-	Peers   int    `json:"peers"`
+	Name     string
+	Link     string
+	Date     string
+	Size     string
+	Seeders  string
+	Leechers string
 }
 
 func Search(query string, resultsNo int) ([]SearchItem, error) {
 	var result []SearchItem
-	client := &http.Client{}
-
-	req, _ := http.NewRequest("GET", config.ApiUrl, nil)
-	q := req.URL.Query()
-	q.Add("q", query)
-	req.URL.RawQuery = q.Encode()
-
-	res, err := client.Do(req)
-
+	fp := gofeed.NewParser()
+	feed, err := fp.ParseURL(searchURL + query)
 	if err != nil {
 		return result, err
 	}
 
-	defer res.Body.Close()
-
-	bodyBytes, err := ioutil.ReadAll(res.Body)
-	err = json.Unmarshal(bodyBytes, &result)
-	if err != nil {
-		return result, err
+	for _, item := range feed.Items[:getMaxSize(len(feed.Items), resultsNo)] {
+		result = append(result, SearchItem{Name: item.Title, Link: item.Link, Date: item.Published, Seeders: item.Extensions["nyaa"]["seeders"][0].Value, Leechers: item.Extensions["nyaa"]["leechers"][0].Value})
 	}
-	return result[:getMaxSize(len(result), resultsNo)], nil
+
+	return result, nil
 }
 
 func getMaxSize(sliceSize, maxResults int) int {

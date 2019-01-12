@@ -1,15 +1,15 @@
-# leetflix - watch content online directly from your terminal
+# mehflix - anime from your terminal to your video player.
 
-_leetflix_ is a small terminal utility that queries the internet for multimedia content hosted using the bittorrent protocol and tries to stream it directly to your video player.
+_mf_ (pronounced _meh-flix_) is a terminal utility to stream anime directly to your video player. It finds its content from [nyaa.si](https://nyaa.si), turns the torrent into a filestream and pipes its contents to a compatible player.
 
 ## Installation
 
-Precompiled binaries are available for windows, mac and linux, just head to the [releases](https://github.com/yonson2/leetflix/releases) page and download the one that suits your platform.
+Precompiled binaries are available for windows, mac and linux, just head to the [releases](https://github.com/yonson2/mf/releases) page and download the one that suits your platform.
 
 If you want to compile from source, first clone this repository:
 
 ```
-git clone git@github.com:yonson2/leetflix.git
+git clone git@github.com:yonson2/mf.git
 ```
 
 then run `go build`
@@ -18,12 +18,12 @@ then run `go build`
 go build .
 ```
 
-You should now see a `leetflix` executable.
+You should now see a `mf` executable.
 
 
 ### Dependencies
 
-`leetflix` relies on either `mpv`, `mplayer` or `vlc` to be installed on your system.
+[mf](https://github.com/yonson2/mf) relies on either [mpv](https://mpv.io), [mplayer](http://www.mplayerhq.hu) or [vlc](https://www.videolan.org) to be installed on your system.
 
 ## Usage
 
@@ -48,4 +48,7 @@ In a similar fashion you can choose how many results you want to see with the `-
 ```
 leetflix -s -n 10 big buck bunny
 ```
+
+### Planned Features
+ - Keep track of shows searched/episode watched
 

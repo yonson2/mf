@@ -4,8 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"github.com/briandowns/spinner"
-	"github.com/yonson2/leetflix/search"
-	"github.com/yonson2/leetflix/torrent"
+	"github.com/yonson2/mf/search"
+	"github.com/yonson2/mf/torrent"
 	"log"
 	"os"
 	"strings"
@@ -27,7 +27,7 @@ func main() {
 	results, err := search.Search(strings.Join(flag.Args(), " "), *resultsNo)
 	s.Stop()
 	if err != nil {
-		log.Println("Error searching for resutls", err)
+		log.Println("Error searching for results", err)
 		return
 	}
 	var result search.SearchItem

@@ -11,6 +11,4 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
-var Env = getEnv("ENV", "development")
-var ApiUrl = getEnv("LF_API_URL", "https://leetapi.pramos.me")
-var HttpPort = getEnv("LF_HTTP_SERVER_PORT", "9120")
+var HttpPort = getEnv("MF_HTTP_SERVER_PORT", "9120")
