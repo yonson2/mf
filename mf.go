@@ -16,6 +16,7 @@ func main() {
 	resultsNo := flag.Int("n", 5, "Number of results to be displayed")
 	isSearch := flag.Bool("s", false, "Search for results instead of auto selecting the best match")
 	flag.Parse()
+	searchQuery := strings.Join(flag.Args(), " ")
 	if len(flag.Args()) == 0 {
 		fmt.Println("Missing name to search. try: \nleetflix <content to stream>")
 		os.Exit(1)
@@ -24,12 +25,18 @@ func main() {
 	s.Suffix = " Searching..."
 	s.Color("green", "bold")
 	s.Start()
-	results, err := search.Search(strings.Join(flag.Args(), " "), *resultsNo)
+	results, err := search.Search(searchQuery, *resultsNo)
 	s.Stop()
 	if err != nil {
 		log.Println("Error searching for results", err)
 		return
 	}
+
+	if len(results) == 0 {
+		fmt.Println("No results found for", searchQuery)
+		os.Exit(1)
+	}
+
 	var result search.SearchItem
 	if *isSearch {
 		prompt := genPrompt(results, *resultsNo)
