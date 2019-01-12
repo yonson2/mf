@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/manifoldco/promptui"
-	"github.com/yonson2/leetflix/search"
+	"github.com/yonson2/mf/search"
 )
 
 func genPrompt(results []search.SearchItem, size int) promptui.Select {
