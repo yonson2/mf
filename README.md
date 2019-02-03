@@ -1,6 +1,6 @@
 # mehflix - anime from your terminal to your video player.
 
-_mf_ (pronounced _meh-flix_) is a terminal utility to stream anime directly to your video player. It finds its content from [nyaa.si](https://nyaa.si), turns the torrent into a filestream and pipes its contents to a compatible player.
+_mf_ (pronounced _meɪflɪkz_) is a terminal utility to stream anime directly to your video player. It finds its content from [nyaa.si](https://nyaa.si), turns the torrent into a filestream and pipes its contents to a compatible player.
 
 ## Installation
 
