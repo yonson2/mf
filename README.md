@@ -29,10 +29,10 @@ You should now see a `mf` executable.
 
 ### Basic usage
 
-If you wanted to stream the best result available (based on the amount of seeders) there are no extra parameters needed, just do `leetflix <name>` substituting `<name>` by your query, for example, if you want to search for the movie Big Buck Bunny:
+If you wanted to stream the best result available (based on the amount of seeders) there are no extra parameters needed, just do `mf <name>` substituting `<name>` by your query, for example, if you want to search for the movie Big Buck Bunny:
 
 ```
-leetflix big buck bunny
+mf big buck bunny
 ```
 
 ### Advanced usage
@@ -40,13 +40,13 @@ leetflix big buck bunny
 To choose which result to stream simply add `-s` as a parameter:
 
 ```
-leetflix -s big buck bunny
+mf -s big buck bunny
 ```
 
 In a similar fashion you can choose how many results you want to see with the `-n` parameter:
 
 ```
-leetflix -s -n 10 big buck bunny
+mf -s -n 10 big buck bunny
 ```
 
 ### Planned Features
