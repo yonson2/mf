@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/yonson2/mf/config"
-	"github.com/yonson2/torrent"
+	"github.com/anacrolix/torrent"
 	"io"
 	"io/ioutil"
 	"net"
