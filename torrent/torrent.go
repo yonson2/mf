@@ -2,9 +2,10 @@ package torrent
 
 import (
 	"fmt"
+	"github.com/anacrolix/log"
+	"github.com/anacrolix/torrent"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/yonson2/mf/config"
-	"github.com/anacrolix/torrent"
 	"io"
 	"io/ioutil"
 	"net"
@@ -20,6 +21,7 @@ func newClient() (*torrent.Client, error) {
 	cfg := torrent.NewDefaultClientConfig()
 	cfg.DataDir = os.TempDir()
 	cfg.Debug = false
+	cfg.Logger = log.Discard
 	c, err := torrent.NewClient(cfg)
 	return c, err
 }
