@@ -5,10 +5,6 @@ matrix:
     # "1.x" always refers to the latest Go version, inc. the patch release.
     - go: 1.x
       env: LATEST=true
-    # - go: 1.7.x
-    # - go: 1.8.x
-    # - go: 1.9.x
-    # - go: 1.10.x
     - go: tip
   allow_failures:
     - go: tip
@@ -33,7 +29,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: Yuj4NSMKrZI9VMCop1e9SsO6+ElV8DltQ8VwQI7t42FoZ+ZrdG9RtUhUPvMdagGbdzCKWnauSJQuDpMgWGzD2ZV4Js9RbAHO+ehNkdcj8PHmheRNkBWbX9e8Yc/InVfz5Q02WWKG7+P1thPSB4axgh8CC6T0J6HHGTaO6NFm3fTsVidyex3kaWy0izm3JV6vcYrdh6ZmM6q6VcZU/dmbPlwJvBOEQHR4p71KPLk14PjCCq32k4KNWadyuLA+l21GkTyhsXOz6XCPAaCDeUi3wP8QrfQIqsynO8jyoWFAEL+xQi1anjL+xZhkIc3p5U2pU8jG5cdH0hiNJzVXNXbozANPW8gJR/we/owyeNpdkSpAXIfuAdRlbkln6cfxxt2hvkO6If19CWQ1qpEdUMJ/L3fy8yumBF7IZeS6Qn0myzmyJdD52loO7C9AHNoKOcImvm4F2jKfgT+IpEiSfxcvs/V1OuLiI5JvNe4AQONRwk/BSfAm2/pVSsZtwral2hZVSPTkH1JqVOKNLssiJBHP1JOZYUoH62AhVv0ulnCsX1T1cZBG767nDYaMlw97KMnZZ7+EwdSRiOp2YwJzb/dlUilXcJ6Hw+nJAmeb6WEyiCMB7uHL3X2CvmKOww6cltyGc2xweTZTrvXATZmV6OeToJFPD6wyRgASj+2IozAjsKE=
+    secure: ClS8iW4waKjkNmyXGQgm4xJDxR9yVEL3NIkT90J2yR7qOKVIIlia7dZaubu0BgArPEhn2sk0BbNlKnk7XNWir20TbJlW/2Y+qMotszxPxT2+z98mAuS4hyHJpLP1KhP2eFX48oy6fyIRBvoTeN+ULCsan/g9IruYsoH91NXtJ8qqtV+6/D5HavKoM4Ery3BO3Qju/ut8qNUQy/TeygjddIMIONFt6nkXeQyL8rGi1FbKs8ZhRG7Ycb+iI/fUa+TbYImfQYRavgfTR5TceY1SPMlQuAc3GE6plHBSeAryqylcfyuvUV6DYKtHzjZ87UoOsbxAyt6mvHbHjZsfhBO8euu1DPRgUVhfMl6wIPALRGSGsGFyYg/359+FC2BZQDHYRhI9b7aEUEVoKdjrpbyGvStTpKoYaGK7zwUe6fBbPSB/O6WrmEZmgDvb9ekJUsJVcJECaynLoWoKpq2uds8sJHtZFwa34gBDlt0Sl0FeAv732rAWladPA/+EX5ctgqhfkPnm8EJyDGMOeYMmN02esK3H40/AgCHjO6HxC+LuVAxYu7kRm/G3MrHhjdtwRdgn64kVwVR5nj2B55LQE4EotCZGI1sJkUZf2JNziN/MT7yYNbbdKR+e5286FvI/QyV46tUyqsU0IUHTo2JJHt8MfEBi9TPZ9Ko1FoazzB+yZ/c=
   file:
   # The names of the binaries to output, based on the -output template passed to gox.
   - mf.windows.amd64.exe
