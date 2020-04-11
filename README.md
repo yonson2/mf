@@ -1,4 +1,4 @@
-# mehflix - stream your favorite content to your video player without leaving your terminal.
+# mehflix - video streaming to your video player without leaving your terminal.
 
 _mf_ (pronounced _meɪflɪkz_) is a terminal utility to stream multimedia content directly to your video player. It finds its content from torrent indexers like [nyaa.si](https://nyaa.si) and [zooqle](https://zooqle.com), turns the torrent into a filestream and pipes its contents to a compatible player.
 
