@@ -1,6 +1,6 @@
 # mehflix - video streaming to your video player without leaving your terminal.
 
-_mf_ (pronounced _meɪflɪkz_) is a terminal utility to stream multimedia content directly to your video player. It finds its content from torrent indexers like [nyaa.si](https://nyaa.si) and [zooqle](https://zooqle.com), turns the torrent into a filestream and pipes its contents to a compatible player.
+_mf_ (pronounced _meɪflɪkz_) is a terminal utility to stream multimedia content directly to your video player. It finds its content from torrent indexers, turns the torrent into a filestream and pipes its contents to a compatible player.
 
 ## Usage
 
@@ -11,7 +11,7 @@ If you wanted to stream the best result available (based on the amount of seeder
 ```
 mf big buck bunny
 ```
-By default `mf` only searches for anime content on [nyaa.si](https://nyaa.si), to also search for other types of content try using the `-g` flag, like so:
+By default `mf` only searches for anime content, to also search for other type of content try using the `-g` flag, like so:
 ```bash
 mf -g big buck bunny
 ```
