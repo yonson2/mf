@@ -98,7 +98,7 @@ func StreamTorrent(tURL string) error {
 	}
 	go http.Serve(listener, nil)
 	//Open player pointing to url
-	err = open.RunWith("http://"+videoHost, player)
+	err = open.RunWith("http://"+videoHost+"/"+file.DisplayPath(), player)
 	//Player was closed, delete file
 	err = os.Remove(filepath.Join(os.TempDir(), file.Path()))
 	return err
