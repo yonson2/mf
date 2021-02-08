@@ -12,7 +12,7 @@ import (
 	"github.com/yonson2/mf/search"
 )
 
-func launchGUI(maxResults int, generic bool, isSearch bool) {
+func launchGUI(maxResults int, generic bool, isSearch bool, player string) {
 	a := app.New()
 	w := a.NewWindow(config.AppName)
 
@@ -34,7 +34,7 @@ func launchGUI(maxResults int, generic bool, isSearch bool) {
 	findTorrent := func (query string, lucky bool) {
 		pb := widget.NewProgressBarInfinite()
 		content.Add(pb)
-		results, err := search.Search(query, maxResults, generic)
+		results, err := search.Search(query, maxResults, true)
 		if err != nil {
 			log.Println("Error searching for results", err)
 			a.Quit()
@@ -50,7 +50,7 @@ func launchGUI(maxResults int, generic bool, isSearch bool) {
 			return
 		}
 		if lucky {
-			err = torrent.StreamTorrent(results[0].Link)
+			err = torrent.StreamTorrent(results[0].Link, player)
 			if err != nil {
 				log.Println("Error streaming file", err)
 				a.Quit()
@@ -69,7 +69,7 @@ func launchGUI(maxResults int, generic bool, isSearch bool) {
 		options.OnChanged = func (value string) {
 			options.Hide()
 			pb.Show()
-			err = torrent.StreamTorrent(searchResultsDict[value])
+			err = torrent.StreamTorrent(searchResultsDict[value], player)
 			if err != nil {
 				log.Println("Error streaming file", err)
 				a.Quit()

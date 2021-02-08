@@ -6,6 +6,8 @@ _mf_ (pronounced _meɪflɪkz_) is a terminal utility to stream multimedia conten
 
 ### Basic usage
 
+mehflix can be run both as a standalone GUI application and from the terminal, if no arguments are provided when launching the app a GUI will spawn.
+
 If you wanted to stream the best result available (based on the amount of seeders) there are no extra parameters needed, just do `mf <name>` substituting `<name>` by your query, for example, if you want to search for the movie Big Buck Bunny:
 
 ```
@@ -15,6 +17,8 @@ By default `mf` only searches for anime content, to also search for other type o
 ```bash
 mf -g big buck bunny
 ```
+### Screenshots
+![mehflix](/assets/screenshot.png?raw=true "mehflix GUI")
 
 ### Advanced usage
 
@@ -44,7 +48,7 @@ git clone git@github.com:yonson2/mf.git
 then run `go build`
 
 ```
-go build .
+go build
 ```
 
 You should now see a `mf` executable.
