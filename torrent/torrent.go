@@ -62,9 +62,9 @@ func getLargestFile(t *torrent.Torrent) *torrent.File {
 	return largest
 }
 
-func StreamTorrent(tURL string) error {
+func StreamTorrent(tURL, preferredPlayer string) error {
 	// Try to get the player first to avoid performing other operations on error
-	player, err := getPlayer()
+	player, err := getPlayer(preferredPlayer)
 	if err != nil {
 		return err
 	}
@@ -106,15 +106,19 @@ func StreamTorrent(tURL string) error {
 	return err
 }
 
-func getPlayer() (string, error) {
-	path, err := exec.LookPath("mpv")
-	if err != nil {
-		path, err = exec.LookPath("mplayer")
+func getPlayer(player string) (string, error) {
+	if player != "" {
+		return exec.LookPath(player)
+	} else {
+		path, err := exec.LookPath("mpv")
 		if err != nil {
-			path, err = exec.LookPath("vlc")
+			path, err = exec.LookPath("mplayer")
+			if err != nil {
+				path, err = exec.LookPath("vlc")
+			}
 		}
+		return path, err
 	}
-	return path, err
 }
 
 func cleanName(name string) string {

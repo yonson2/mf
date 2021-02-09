@@ -10,7 +10,7 @@ import (
 	"os"
 )
 
-func launchCLI(query string, maxResults int, generic bool, isSearch bool) {
+func launchCLI(query string, maxResults int, generic bool, isSearch bool, player string) {
 	s := spinner.New(spinner.CharSets[7], 100*time.Millisecond)
 	s.Suffix = " Searching..."
 	s.Color("green", "bold")
@@ -40,7 +40,7 @@ func launchCLI(query string, maxResults int, generic bool, isSearch bool) {
 	} else {
 		result = results[0]
 	}
-	err = torrent.StreamTorrent(result.Link)
+	err = torrent.StreamTorrent(result.Link, player)
 	if err != nil {
 		log.Println("There was an error:", err)
 	}
