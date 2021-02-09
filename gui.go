@@ -34,7 +34,7 @@ func launchGUI(maxResults int, generic bool, isSearch bool) {
 	findTorrent := func (query string, lucky bool) {
 		pb := widget.NewProgressBarInfinite()
 		content.Add(pb)
-		results, err := search.Search(query, maxResults, generic)
+		results, err := search.Search(query, maxResults, true)
 		if err != nil {
 			log.Println("Error searching for results", err)
 			a.Quit()
