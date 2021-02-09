@@ -82,15 +82,16 @@ func StreamTorrent(tURL string) error {
 	<-torrent.GotInfo()
 	//Get Biggest file.
 	file := getLargestFile(torrent)
-	fmt.Println("About to stream file", file.DisplayPath())
+	fileName := cleanName(file.DisplayPath())
+	fmt.Println("About to stream file", file.DisplayPath(), "as", fileName)
 	//Get file reader from file.
 	fileReader := file.NewReader()
 	defer fileReader.Close()
 	//Spin up http server and redirect to file reader on request
 	videoHost := "127.0.0.1:" + config.HttpPort
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Disposition", "attachment; filename=\""+file.DisplayPath()+"\"")
-		http.ServeContent(w, r, file.DisplayPath(), time.Now(), fileReader)
+		w.Header().Set("Content-Disposition", "attachment; filename=\""+fileName+"\"")
+		http.ServeContent(w, r, fileName, time.Now(), fileReader)
 	})
 	listener, err := net.Listen("tcp", videoHost)
 	if err != nil {
@@ -98,7 +99,7 @@ func StreamTorrent(tURL string) error {
 	}
 	go http.Serve(listener, nil)
 	//Open player pointing to url
-	err = open.RunWith("http://"+videoHost+"/"+file.DisplayPath(), player)
+	err = open.RunWith("http://"+videoHost+"/"+fileName, player)
 	//Player was closed, delete file
 	err = os.Remove(filepath.Join(os.TempDir(), file.Path()))
 	err = listener.Close()
@@ -114,4 +115,9 @@ func getPlayer() (string, error) {
 		}
 	}
 	return path, err
+}
+
+func cleanName(name string) string {
+	r := strings.NewReplacer("[", "","]", "", "(", "", ")", "", " ", "_")
+	return r.Replace(name)
 }
