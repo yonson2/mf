@@ -54,8 +54,13 @@ func Search(query string, resultsNo int, genericSearch bool) ([]SearchItem, erro
 			)
 		}
 	}
-	return result[:resultsNo], nil
+
+	if len(result) > resultsNo {
+		return result[:resultsNo], nil
+	}
+	return result, nil
 }
+
 
 func getMaxSize(sliceSize, maxResults int) int {
 	if sliceSize > maxResults {
