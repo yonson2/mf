@@ -11,4 +11,5 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
+var AppName string = "mehflix"
 var HttpPort = getEnv("MF_HTTP_SERVER_PORT", "9120")

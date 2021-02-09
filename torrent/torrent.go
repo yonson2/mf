@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/anacrolix/log"
 	"github.com/anacrolix/torrent"
-	"github.com/skratchdot/open-golang/open"
 	"github.com/yonson2/mf/config"
+	"github.com/yonson2/mf/open"
 	"io"
 	"io/ioutil"
 	"net"
@@ -62,9 +62,9 @@ func getLargestFile(t *torrent.Torrent) *torrent.File {
 	return largest
 }
 
-func StreamTorrent(tURL string) error {
+func StreamTorrent(tURL, preferredPlayer string) error {
 	// Try to get the player first to avoid performing other operations on error
-	player, err := getPlayer()
+	player, err := getPlayer(preferredPlayer)
 	if err != nil {
 		return err
 	}
@@ -82,15 +82,16 @@ func StreamTorrent(tURL string) error {
 	<-torrent.GotInfo()
 	//Get Biggest file.
 	file := getLargestFile(torrent)
-	fmt.Println("About to stream file", file.DisplayPath())
+	fileName := cleanName(file.DisplayPath())
+	fmt.Println("About to stream file", file.DisplayPath(), "as", fileName)
 	//Get file reader from file.
 	fileReader := file.NewReader()
 	defer fileReader.Close()
 	//Spin up http server and redirect to file reader on request
 	videoHost := "127.0.0.1:" + config.HttpPort
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Disposition", "attachment; filename=\""+file.DisplayPath()+"\"")
-		http.ServeContent(w, r, file.DisplayPath(), time.Now(), fileReader)
+		w.Header().Set("Content-Disposition", "attachment; filename=\""+fileName+"\"")
+		http.ServeContent(w, r, fileName, time.Now(), fileReader)
 	})
 	listener, err := net.Listen("tcp", videoHost)
 	if err != nil {
@@ -98,19 +99,29 @@ func StreamTorrent(tURL string) error {
 	}
 	go http.Serve(listener, nil)
 	//Open player pointing to url
-	err = open.RunWith("http://"+videoHost+"/"+file.DisplayPath(), player)
+	err = open.RunWith("http://"+videoHost+"/"+fileName, player)
 	//Player was closed, delete file
 	err = os.Remove(filepath.Join(os.TempDir(), file.Path()))
+	err = listener.Close()
 	return err
 }
 
-func getPlayer() (string, error) {
-	path, err := exec.LookPath("mpv")
-	if err != nil {
-		path, err = exec.LookPath("mplayer")
+func getPlayer(player string) (string, error) {
+	if player != "" {
+		return exec.LookPath(player)
+	} else {
+		path, err := exec.LookPath("mpv")
 		if err != nil {
-			path, err = exec.LookPath("vlc")
+			path, err = exec.LookPath("mplayer")
+			if err != nil {
+				path, err = exec.LookPath("vlc")
+			}
 		}
+		return path, err
 	}
-	return path, err
+}
+
+func cleanName(name string) string {
+	r := strings.NewReplacer("[", "","]", "", "(", "", ")", "", " ", "_")
+	return r.Replace(name)
 }
